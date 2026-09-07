@@ -1,4 +1,4 @@
-# 💰 SWARM‑SEC Cost Model
+# 💰 SWARM‑SEC Cost Model 
 
 This document outlines the Bobcoin spend for each agent in the SWARM‑SEC pipeline.  
 The model ensures efficiency, transparency, and budget‑friendly execution.
@@ -6,6 +6,7 @@ The model ensures efficiency, transparency, and budget‑friendly execution.
 ---
 
 ## 📊 Bobcoin Allocation Table
+```
 
 | Stage       | Agent                | Function                                | Coins (Approx.) |
 |-------------|----------------------|-----------------------------------------|-----------------|
