@@ -1,7 +1,6 @@
 # 🛡️ PROJECT SWARM-SEC
 
 > **Agentic Multi-Agent Security Remediation & Code Modernization Engine**  
-> *Developed by Team **INNOVATRIX** for the SkillUp Hackathon (IBM SkillsBuild)*
 
 ---
 
