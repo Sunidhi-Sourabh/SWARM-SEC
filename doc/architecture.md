@@ -5,7 +5,7 @@ This document explains the overall architecture and workflow of the SWARM‑SEC 
 ---
 
 ## 📂 Repository Structure
-
+```
 SWARM-SEC/
 │
 ├── main/                     # Stable hackathon-ready branch
@@ -25,7 +25,7 @@ SWARM-SEC/
 │   ├── cost_model.md          # Bobcoin spend breakdown
 │   └── roadmap.md             # Hackathon roadmap
 └── .gitignore
-
+```
 ---
 
 ## 🔗 Pipeline Flow
