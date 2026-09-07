@@ -1,4 +1,4 @@
-# 🗺️ SWARM‑SEC Hackathon Roadmap
+# 🗺️ SWARM‑SEC Roadmap
 > This document outlines the step‑by‑step roadmap for building and presenting the SWARM‑SEC project with IBM Bob integration at Smart India Hackathon 2026.
 
 ---
