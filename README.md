@@ -98,6 +98,7 @@ def get_user_profile(user_id):
     return cursor.fetchone()
 ```
 ### Modernized Output Generated via IBM Bob Swarm
+```python
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel, ConfigDict
@@ -119,20 +120,24 @@ async def get_user_profile(user_id: int, db: AsyncSession = Depends(get_db)):
             detail="User profile not found"
         )
     return user
+```
 
 ---
 
 ## Quickstart & Local Execution Guide
 1. Clone & Set Up Workspace
+```
    git clone [https://github.com/your-username/PROJECT-SWARM-SEC.git](https://github.com/your-username/PROJECT-SWARM-SEC.git)
 cd PROJECT-SWARM-SEC
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
+```
 
 2. Run Zero-Token Local AST Parser
+```
    python ast_swarm.py
-
+```
 This generates ast_schema.json locally for 0 Bobcoins.
 
 3. Trigger IBM Bob Swarm Execution
@@ -144,9 +149,7 @@ Load the workspace in IBM Bob (or your IBM SkillsBuild environment). The workspa
 
 🔮 Future Scope & Roadmap
 Phase 1 (Hackathon MVP): CLI Tool & IBM Bob multi-agent pipeline modernizing monolithic Python code into FastAPI microservices.
-
 Phase 2 (IDE Plugin Release): Packaging SWARM-SEC into a native VS Code Extension powered by IBM Bob APIs for real-time developer feedback.
-
 Phase 3 (Enterprise CI/CD Pipelines): Integration into Red Hat OpenShift & IBM Cloud DevOps pipelines to automatically audit, patch, and document enterprise applications prior to production deployment.
 
 👥 Team INNOVATRIX
@@ -158,7 +161,7 @@ Neha Thakur
 
 Track: AI for Impact
 Problem Statement: Multi-Agent AI Systems
-Event: SkillUp Hackathon (IBM SkillsBuild) - North Region
+Event: SkillUp Hackathon (IBM SkillsBuild 2026) - North Region
 
 
 ---
