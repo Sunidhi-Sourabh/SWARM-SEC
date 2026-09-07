@@ -16,7 +16,7 @@ The model ensures efficiency, transparency, and budget‑friendly execution.
 | Refactor    | Refactoring Architect (Agent 3) | Rewrite unsafe code securely | 10–12           |
 | Verify      | QA Verifier (Agent 4)| Regression tests + Mermaid diagram       | 4–5             |
 | **Total**   |                      |                                         | ~28–32          |
-
+```
 ---
 
 ## 🧠 Cost Efficiency Strategy
