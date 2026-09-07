@@ -21,40 +21,49 @@ Modern software teams lose thousands of hours manually triaging security vulnera
 * 📊 **Self-Documenting Codebase:** Automatically renders interactive Mermaid.js architecture diagrams and updates project `README.md` files upon verification.
 * 💰 **Bobcoin Optimized:** Full execution pipeline completes under **32 Bobcoins** (well within the 50 Bobcoin hackathon budget limit).
 
-+-----------------------------------------------------------------------+
-|                      UNSECURE / LEGACY REPOSITORY                     |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-| STAGE 1: Deterministic Local AST Parser (ast_swarm.py)                 |
-| - Extracts function call graphs & raw SQL queries into JSON           |
-| - Token Cost: 0 Bobcoins                                              |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-| STAGE 2: IBM Bob Multi-Agent Swarm Collaboration                      |
-|                                                                       |
-| [Agent 1: Security Auditor]  ---> Scans JSON for OWASP/CVE risks     |
-| [Agent 2: Exploit Simulator] ---> Generates failing pytest PoC        |
-| [Agent 3: Refactoring Agent] ---> Rewrites code to Async FastAPI     |
-| - Token Cost: ~21 Bobcoins                                            |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-| STAGE 3: Test Parity & Verification Suite                             |
-| [Agent 4: QA Verifier]                                                |
-| - Executes dual-pass tests (Legacy vs. Refactored Output)            |
-| - Appends live Mermaid.js system maps to Markdown docs                |
-| - Token Cost: ~9 Bobcoins                                             |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-|             VERIFIED PULL REQUEST & SECURE MICROSERVICE               |
-+-----------------------------------------------------------------------+
+----
+## System Architecture
+graph TD
+    %% Base Input
+    A[Unsecure / Legacy Repository<br/>vulnerable_monolith.py] --> B[STAGE 1: Local AST Parser<br/>ast_swarm.py]
+```
+    %% Stage 1
+    subgraph Stage_1 [Stage 1: Zero-Token Local Pre-Processing]
+        B -->|Parses Functions & Raw SQL| C[(ast_schema.json)]
+        style B fill:#1f2937,stroke:#3b82f6,stroke-width:2px,color:#fff
+        style C fill:#111827,stroke:#10b981,stroke-width:2px,color:#fff
+    end
+
+    %% Stage 2 Swarm
+    C -->|Passes JSON Metadata| D[STAGE 2: IBM Bob Multi-Agent Swarm]
+
+    subgraph Stage_2 [Stage 2: IBM Bob Agentic Collaboration Loop ~21 Bobcoins]
+        D --> E[Agent 1: Security Auditor]
+        E -->|Identifies OWASP Flaws| F[Agent 2: Exploit Simulator]
+        F -->|Generates Failing pytest PoC| G[Agent 3: Refactoring Architect]
+        G -->|Outputs Async FastAPI + SQLAlchemy Code| H[Candidate Patch]
+        
+        style D fill:#1e1b4b,stroke:#6366f1,stroke-width:2px,color:#fff
+        style E fill:#311b92,stroke:#818cf8,color:#fff
+        style F fill:#311b92,stroke:#818cf8,color:#fff
+        style G fill:#311b92,stroke:#818cf8,color:#fff
+    end
+
+    %% Stage 3 Verification
+    H --> I[STAGE 3: Test Parity & Verification Suite]
+
+    subgraph Stage_3 [Stage 3: QA Verification & Documentation ~9 Bobcoins]
+        I --> J[Agent 4: QA & Regression Verifier]
+        J -->|Runs PyTest Suite| K{Tests Pass?}
+        K -->|No: Feedback Loop| G
+        K -->|Yes| L[Generate Verified PR & Update README.md]
+        
+        style I fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff
+        style J fill:#065f46,stroke:#34d399,color:#fff
+        style K fill:#047857,stroke:#6ee7b7,color:#fff
+        style L fill:#022c22,stroke:#10b981,stroke-width:2px,color:#fff
+    end
+```
 
 ---
 
