@@ -22,6 +22,18 @@ Modern software teams lose thousands of hours manually triaging security vulnera
 * 💰 **Bobcoin Optimized:** Full execution pipeline completes under **32 Bobcoins** (well within the 50 Bobcoin hackathon budget limit).
 
 ----
+## 🔗 Bob Integration
+
+This project uses IBM Bob multi-agent integration:
+- Auditor Agent → detects vulnerabilities
+- Exploit Simulator Agent → generates failing PoC tests
+- Refactoring Architect Agent → rewrites unsafe code using FastAPI + SQLAlchemy
+- QA Verifier Agent → runs regression tests and generates Mermaid diagrams
+
+Run the pipeline via `hackathon_pipeline.ipynb`.  
+Bob agents are triggered directly from notebook cells using `ibm-bob-sdk`.
+
+---
 ## System Architecture
 ```
 graph TD
