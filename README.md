@@ -23,10 +23,11 @@ Modern software teams lose thousands of hours manually triaging security vulnera
 
 ----
 ## System Architecture
+```
 graph TD
     %% Base Input
     A[Unsecure / Legacy Repository<br/>vulnerable_monolith.py] --> B[STAGE 1: Local AST Parser<br/>ast_swarm.py]
-```
+
     %% Stage 1
     subgraph Stage_1 [Stage 1: Zero-Token Local Pre-Processing]
         B -->|Parses Functions & Raw SQL| C[(ast_schema.json)]
