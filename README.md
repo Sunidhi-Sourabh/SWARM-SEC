@@ -170,8 +170,11 @@ Load the workspace in IBM Bob (or your IBM SkillsBuild environment). The workspa
 3. Run QA Verifier to assert test parity and append Mermaid.js diagram to README.md
 
 🔮 Future Scope & Roadmap
+
 Phase 1 (Hackathon MVP): CLI Tool & IBM Bob multi-agent pipeline modernizing monolithic Python code into FastAPI microservices.
+
 Phase 2 (IDE Plugin Release): Packaging SWARM-SEC into a native VS Code Extension powered by IBM Bob APIs for real-time developer feedback.
+
 Phase 3 (Enterprise CI/CD Pipelines): Integration into Red Hat OpenShift & IBM Cloud DevOps pipelines to automatically audit, patch, and document enterprise applications prior to production deployment.
 
 👥 Team INNOVATRIX
