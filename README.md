@@ -186,6 +186,4 @@ Problem Statement: Multi-Agent AI Systems |
 Event: SkillUp Hackathon (IBM SkillsBuild 2026) - North Region
 
 
----
-
-## 🏗️ System Architecture & Workflow
+--## 🏗️ System Architecture & Workflow
