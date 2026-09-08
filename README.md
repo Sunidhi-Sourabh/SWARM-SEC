@@ -175,11 +175,8 @@ Phase 2 (IDE Plugin Release): Packaging SWARM-SEC into a native VS Code Extensio
 Phase 3 (Enterprise CI/CD Pipelines): Integration into Red Hat OpenShift & IBM Cloud DevOps pipelines to automatically audit, patch, and document enterprise applications prior to production deployment.
 
 👥 Team INNOVATRIX
-Sanvi Jain (Team Leader)
-Sunidhi Sourabh
-Nikita
-Yaashi Hemnani
-Neha Thakur
+Sunidhi Sourabh | Sanvi Jain 
+
 
 Track: AI for Impact
 Problem Statement: Multi-Agent AI Systems
