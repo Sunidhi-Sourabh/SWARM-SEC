@@ -1,20 +1,16 @@
-
+# Vulnerable example
 import sqlite3
 
-conn = sqlite3.connect("users.db")
-cursor = conn.cursor()
+def get_user_data(username):
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    # ❌ Vulnerable: direct string concatenation (SQL Injection risk)
+    query = "SELECT * FROM users WHERE username = '" + username + "';"
+    cursor.execute(query)
+    result = curs
+    or.fetchall()
+    conn.close()
+    return result
 
-username = input("Enter username: ")
-password = input("Enter password: ")
+print(get_user_data("admin"))
 
-# ❌ Vulnerable query (string concatenation)
-query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
-cursor.execute(query)
-result = cursor.fetchall()
-
-if result:
-    print("✅ Login successful (but vulnerable!)")
-else:
-    print("❌ Login failed")
-
-conn.close()
