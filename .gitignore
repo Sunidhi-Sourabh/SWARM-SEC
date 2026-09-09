@@ -1,1 +1,38 @@
+# Created by pytest automatically.
+*
+---
 
+##CACHEDIR.TAG
+Signature: 8a477f597d28d172789f06886806bc55
+# This file is a cache directory tag created by pytest.
+# For information about cache directory tags, see:
+#	https://bford.info/cachedir/spec.html
+
+---
+##nodeids
+[
+  "dev/tests/test_exploit.py::TestMissingInputValidation::test_accepts_none_without_error",
+  "dev/tests/test_exploit.py::TestMissingInputValidation::test_accepts_overlong_username",
+  "dev/tests/test_exploit.py::TestMissingInputValidation::test_accepts_sql_metacharacters",
+  "dev/tests/test_exploit.py::TestModuleLevelSideEffect::test_import_executes_db_call",
+  "dev/tests/test_exploit.py::TestSQLInjection::test_boolean_blind_true_condition",
+  "dev/tests/test_exploit.py::TestSQLInjection::test_classic_or_1_equals_1_bypass",
+  "dev/tests/test_exploit.py::TestSQLInjection::test_comment_stripping_bypass",
+  "dev/tests/test_exploit.py::TestSQLInjection::test_union_based_data_extraction",
+  "dev/tests/test_exploit.py::test_exploit_suite_loaded",
+  "dev/tests/test_secure_parity.py::test_get_existing_user_admin",
+  "dev/tests/test_secure_parity.py::test_get_existing_user_alice",
+  "dev/tests/test_secure_parity.py::test_no_module_level_side_effect",
+  "dev/tests/test_secure_parity.py::test_overlong_username_rejected",
+  "dev/tests/test_secure_parity.py::test_response_schema_matches_pydantic_model",
+  "dev/tests/test_secure_parity.py::test_sql_injection_payloads_rejected[' OR '1'='1]",
+  "dev/tests/test_secure_parity.py::test_sql_injection_payloads_rejected[' UNION SELECT id, password, password FROM users --]",
+  "dev/tests/test_secure_parity.py::test_sql_injection_payloads_rejected[admin' AND '1'='1]",
+  "dev/tests/test_secure_parity.py::test_sql_injection_payloads_rejected[admin'--]",
+  "dev/tests/test_secure_parity.py::test_sql_injection_payloads_rejected[admin'; DROP TABLE users; --]",
+  "dev/tests/test_secure_parity.py::test_unknown_user_returns_404"
+]
+
+---
+##lastfailed
+{}
