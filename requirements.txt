@@ -1,0 +1,16 @@
+# Core Python libraries
+sqlite3
+
+# IBM Bob SDK
+ibm-bob-sdk
+
+# Web framework (used in refactored secure code)
+fastapi
+sqlalchemy
+
+# Testing framework
+pytest
+
+# Optional utilities
+mermaid-js   # for diagrams in docs
+jupyter      # to run hackathon_pipeline.ipynb
