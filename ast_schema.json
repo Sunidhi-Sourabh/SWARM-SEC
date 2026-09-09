@@ -1,0 +1,32 @@
+{
+  "source_file": "dev/vulnerable_code/vulnerable_example.py",
+  "functions": [
+    {
+      "name": "get_user_data",
+      "lineno": 4,
+      "args": [
+        "username"
+      ],
+      "calls": [
+        "connect",
+        "cursor",
+        "execute",
+        "fetchall",
+        "close"
+      ],
+      "string_concats": [
+        "\"SELECT * FROM users WHERE username = '\" + username + \"';\"",
+        "\"SELECT * FROM users WHERE username = '\" + username"
+      ]
+    }
+  ],
+  "imports": [
+    "sqlite3"
+  ],
+  "raw_sql_patterns": [
+    {
+      "lineno": 8,
+      "snippet": "SELECT * FROM users WHERE username = '"
+    }
+  ]
+}
