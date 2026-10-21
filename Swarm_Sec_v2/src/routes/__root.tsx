@@ -9,6 +9,7 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -130,6 +131,7 @@ function RootComponent() {
       <footer className="border-t py-8"><div className="mx-auto max-w-7xl space-y-5 px-4"><p className="font-mono text-sm">SWARM-SEC · Team Innovatrix · Powered by IBM Bob</p><div className="flex flex-wrap gap-5 text-sm text-primary"><a href="https://github.com/Sunidhi-Sourabh/SWARM-SEC" target="_blank" rel="noreferrer">GitHub Repository</a><a href="https://github.com/Sunidhi-Sourabh/SWARM-SEC#readme" target="_blank" rel="noreferrer">Documentation Hub</a></div><PrivacyNotice /></div></footer>
       </PlaygroundProvider></AuthProvider>
       <Toaster theme="dark" position="bottom-right" />
+      <Analytics />
     </QueryClientProvider>
   );
 }
