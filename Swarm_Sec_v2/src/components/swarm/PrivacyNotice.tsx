@@ -1,0 +1,4 @@
+import { LockKeyhole } from 'lucide-react';
+export function PrivacyNotice() {
+  return <div className="space-y-2 text-xs leading-relaxed text-muted-foreground"><p className="flex gap-2"><LockKeyhole className="h-4 w-4 shrink-0 text-success" /><span><strong className="text-foreground">Zero Code Retention:</strong> SWARM-SEC processes input code and network configs dynamically in memory. We never sell, retain, or use your private enterprise code to train public models.</span></p><p><strong className="text-foreground">Full Data Sovereignty:</strong> Your saved audit history is encrypted and accessible only to you. You can export or delete your data at any time.</p><p>Only audits you explicitly save are retained. Encryption is managed by the application; it is not end-to-end encryption.</p></div>;
+}
