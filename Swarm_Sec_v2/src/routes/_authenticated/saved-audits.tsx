@@ -1,0 +1,16 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { useServerFn } from '@tanstack/react-start';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { Download, Trash2, LockKeyhole } from 'lucide-react';
+import { toast } from 'sonner';
+import { listAudits, deleteAudit } from '@/lib/audits.functions';
+import { Button } from '@/components/ui/button';
+import { CodePane } from '@/components/swarm/ui';
+import { downloadText } from '@/lib/exports';
+export const Route = createFileRoute('/_authenticated/saved-audits')({ head: () => ({ meta: [{ title: 'My Saved Security Audits — SWARM-SEC' }, { name: 'description', content: 'Export and delete your private encrypted security audits.' }, { property: 'og:title', content: 'Saved Audits History — SWARM-SEC' }, { property: 'og:description', content: 'Owner-only encrypted AppSec and NetSecOps audit history.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' }] }), component: History });
+function History() {
+ const fetch = useServerFn(listAudits); const remove = useServerFn(deleteAudit); const qc = useQueryClient(); const [selected, setSelected] = useState<string | null>(null);
+ const q = useQuery({ queryKey: ['saved-audits'], queryFn: () => fetch() }); const active = q.data?.find(r => r.id === selected);
+ return <div className="mx-auto max-w-7xl px-4 py-12"><div className="flex items-center gap-3"><LockKeyhole className="text-success" /><h1 className="text-3xl">Saved Audits History</h1></div><p className="mt-3 text-muted-foreground">Your private encrypted scans · newest first · latest 100 audits</p>{q.isPending && <p className="py-8">Loading your encrypted audits…</p>}{q.error && <p role="alert" className="py-8 text-destructive">{q.error.message}</p>}{q.data?.length === 0 && <p className="py-12 text-muted-foreground">No saved audits yet.</p>}<div className="mt-8 grid gap-5 lg:grid-cols-[320px_1fr]"><div className="space-y-3">{q.data?.map(row => <div key={row.id} className="rounded border bg-card p-4"><Button variant="ghost" className="h-auto w-full justify-start whitespace-normal text-left" onClick={() => setSelected(row.id)}>{row.audit.environment} · {row.audit.findings.length} findings</Button><p className="my-2 text-xs text-muted-foreground">{new Date(row.createdAt).toLocaleString()}</p><div className="flex gap-2"><Button variant="outline" size="icon" aria-label="Export audit" onClick={() => downloadText('swarmsec-audit.json', JSON.stringify(row.audit, null, 2), 'application/json')}><Download /></Button><Button variant="outline" size="icon" aria-label="Delete audit" onClick={async () => { if (!confirm('Delete this saved audit permanently?')) return; try { await remove({ data: { id: row.id } }); setSelected(null); await qc.invalidateQueries({ queryKey: ['saved-audits'] }); toast.success('Audit deleted'); } catch { toast.error('Deletion failed'); } }}><Trash2 /></Button></div></div>)}</div><div>{active && <div className="space-y-4"><CodePane title="Original input" code={active.audit.input} /><CodePane title="Saved remediated output" code={active.audit.remediated} tone="good" /><CodePane title="Generated PyTest assertions" code={active.audit.tests} /></div>}</div></div></div>;
+}
