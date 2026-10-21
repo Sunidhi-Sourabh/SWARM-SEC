@@ -1,4 +1,4 @@
-# 🤖 IBM Bob Agents – SWARM‑SEC
+# 🤖 IBM Bob & Cisco Agents – SWARM‑SEC
 
 This document defines the roles, responsibilities, and outputs of each IBM Bob agent integrated into the SWARM‑SEC pipeline.  
 The agents work sequentially to detect vulnerabilities, generate exploits, refactor unsafe code, extend authentication features, and verify fixes.
@@ -47,24 +47,23 @@ The agents work sequentially to detect vulnerabilities, generate exploits, refac
 
 ---
 
-## 📝 Agent 5 – Register User
-- **Function:** Adds new accounts securely into the database (`INSERT`).
-- **Purpose:** Extends authentication system with user onboarding.
-- **Output:** Confirmation message in notebook cell.
+## 🌐 Agent 5 – NetSec Cisco Infrastructure Auditor
+- **Implementation Files:** `agent5_engine.py` / `app.py` (Flask REST API Gateway)
+- **Function:** Ingests raw Cisco IOS running-configurations (`running-config`), evaluates parameters against CCNA hardening baselines (SSH v2, switchport sticky MAC port security, VLAN 99 management isolation, and perimeter NAT/PAT overload), and exposes a REST API for automated compliance checks.
+- **Purpose:** Connects software security directly to physical/virtual network infrastructure compliance within the **SWARM-SEC** pipeline.
+- **Output:** 
+  - Structured Compliance JSON Payload (`/api/v1/audit/cisco`)
+  - Automated Cisco IOS CLI Remediation Script Sequence
+- **Bobcoin Cost:** **~2–4 BC** *(Hybrid Local Regex AST + Optional LLM Remediation Reasoning)*
 
 ---
 
-## 🔑 Agent 6 – Password Manager
-- **Function:** Updates existing user credentials (`UPDATE`).
-- **Purpose:** Allows secure password changes to maintain account safety.
-- **Output:** Success/failure message in notebook cell.
+## 🔐 Auth & DB Lifecycle Utility Modules
+*(Local database CRUD operations for authentication system lifecycle management; 0 BC cost.)*
 
----
-
-## 🗑️ Agent 7 – Account Deleter
-- **Function:** Removes accounts from the database (`DELETE`).
-- **Purpose:** Provides full lifecycle control of authentication system.
-- **Output:** Confirmation message in notebook cell.
+- **Register User (`INSERT`):** Adds new user accounts securely into the database.
+- **Password Manager (`UPDATE`):** Updates existing user credentials with secure hashing algorithms.
+- **Account Deleter (`DELETE`):** Purges user records to ensure full database lifecycle control.
 
 ---
 
