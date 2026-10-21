@@ -91,7 +91,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -124,12 +127,36 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <AuthProvider><PlaygroundProvider>
-      <Nav />
-      <main className="min-h-screen"><Outlet /></main>
-      <footer className="border-t py-8"><div className="mx-auto max-w-7xl space-y-5 px-4"><p className="font-mono text-sm">SWARM-SEC · Team Innovatrix · Powered by IBM Bob</p><div className="flex flex-wrap gap-5 text-sm text-primary"><a href="https://github.com/Sunidhi-Sourabh/SWARM-SEC" target="_blank" rel="noreferrer">GitHub Repository</a><a href="https://github.com/Sunidhi-Sourabh/SWARM-SEC#readme" target="_blank" rel="noreferrer">Documentation Hub</a></div><PrivacyNotice /></div></footer>
-      </PlaygroundProvider></AuthProvider>
+      <AuthProvider>
+        <PlaygroundProvider>
+          <Nav />
+          <main className="min-h-screen">
+            <Outlet />
+          </main>
+          <footer className="border-t py-8">
+            <div className="mx-auto max-w-7xl space-y-5 px-4">
+              <p className="font-mono text-sm">SWARM-SEC · Team Innovatrix · Powered by IBM Bob</p>
+              <div className="flex flex-wrap gap-5 text-sm text-primary">
+                <a
+                  href="https://github.com/Sunidhi-Sourabh/SWARM-SEC"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub Repository
+                </a>
+                <a
+                  href="https://github.com/Sunidhi-Sourabh/SWARM-SEC#readme"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Documentation Hub
+                </a>
+              </div>
+              <PrivacyNotice />
+            </div>
+          </footer>
+        </PlaygroundProvider>
+      </AuthProvider>
       <Toaster theme="dark" position="bottom-right" />
       <Analytics />
     </QueryClientProvider>
