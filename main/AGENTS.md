@@ -69,13 +69,13 @@ The agents work sequentially to detect vulnerabilities, generate exploits, refac
 ---
 
 ## 📊 Bobcoin Spend Summary
-| Agent                | Coins |
+| Agent                 | Coins |
 |-----------------------|-------|
-| Auditor              | 7–8   |
-| Exploit Simulator    | 6–7   |
+| Auditor               | 7–8   |
+| Exploit Simulator     | 6–7   |
 | Refactoring Architect| 10–12 |
 | QA Verifier          | 4–5   |
-| **Total (core)**     | ~28–32 |
+| **Total (core)**      | ~28–32 |
 
 *(Register, Change Password, Delete are local DB ops, no Bobcoin cost.)*
 
