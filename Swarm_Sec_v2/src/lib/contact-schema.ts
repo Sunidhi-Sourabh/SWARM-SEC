@@ -1,0 +1,2 @@
+import { z } from 'zod';
+export const contactSchema = z.object({ name: z.string().trim().min(1, 'Name is required').max(100), org: z.string().trim().max(150).default(''), email: z.string().trim().email('Invalid email').max(255), subject: z.string().trim().min(1, 'Subject is required').max(150), type: z.enum(['Security Audit Request', 'Partnership / IBM Integration', 'Product Feedback', 'Research Collaboration']), message: z.string().trim().min(1, 'Message is required').max(2000) });
