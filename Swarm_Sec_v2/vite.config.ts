@@ -12,4 +12,10 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    // Pre-bundle the analytics add-on together with React so it never gets its own React copy.
+    optimizeDeps: {
+      include: ["react", "react-dom", "@vercel/analytics/react"],
+    },
+  },
 });
