@@ -1,15 +1,68 @@
-<!-- LOVABLE:BEGIN -->
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
-<!-- LOVABLE:END -->
+# 🤖 IBM Bob & Cisco Agents – SWARM‑SEC
 
-- Keep the shared security playground state in a root provider so input and results survive navigation without browser storage; unsaved enterprise source never leaves browser memory.
-- Use the Lezer Python parser and bounded deterministic rules for live analysis; generated remediation and tests are review artifacts, never claim executed exploit or compliance certification.
-- Encrypt saved audit payloads with AES-GCM and a per-user key derived from the server encryption secret; private server functions and owner-scoped RLS enforce access.
-- Store contact submissions before attempting the owner's fixed Formspree destination; only report email acceptance when the provider confirms it.
+This document defines the roles, responsibilities, and outputs of each IBM Bob agent integrated into the SWARM‑SEC pipeline.  
+The agents work sequentially to detect vulnerabilities, generate exploits, refactor unsafe code, extend authentication features, and verify fixes.
+
+---
+
+## 🧩 Agent 0 – Parser
+- **File:** `ast_swarm.py`
+- **Function:** Converts vulnerable source code into an Abstract Syntax Tree (AST) schema (`ast_schema.json`).
+- **Purpose:** Provides a structured representation of the code for downstream agents.
+- **Output:** `ast_schema.json`
+
+---
+
+## 🔍 Agent 1 – Auditor
+- **Function:** Reads the AST schema and identifies vulnerabilities (e.g., SQL injection, unsafe queries).
+- **Purpose:** Security audit of the codebase.
+- **Output:** Vulnerability report (displayed in notebook cell).
+- **Bobcoin Cost:** ~7–8 BC
+
+---
+
+## 💣 Agent 2 – Exploit Simulator
+- **Function:** Generates failing Proof‑of‑Concept (PoC) tests to prove vulnerabilities are exploitable.
+- **Purpose:** Demonstrates real impact of vulnerabilities.
+- **Output:** Pytest file → `dev/tests/test_exploit_poc.py`
+- **Bobcoin Cost:** ~6–7 BC
+
+---
+
+## 🛠️ Agent 3 – Refactoring Architect
+- **Function:** Refactors unsafe code into secure implementations using FastAPI + SQLAlchemy ORM.
+- **Purpose:** Eliminates vulnerabilities while preserving functionality.
+- **Output:** Secure code → `refactored_code/secure_example.py`
+- **Bobcoin Cost:** ~10–12 BC
+
+---
+
+## ✅ Agent 4 – QA Verifier
+- **Function:** Runs regression tests to ensure refactored code is functionally equivalent to original.
+- **Purpose:** Guarantees correctness and generates updated documentation.
+- **Output:** 
+  - Test results (all passing)  
+  - Mermaid.js diagram → `docs/architecture.md`
+- **Bobcoin Cost:** ~4–5 BC
+
+---
+
+## 🌐 Agent 5 – NetSec Cisco Infrastructure Auditor
+- **Implementation Files:** `agent5_engine.py` / `app.py` (Flask REST API Gateway)
+- **Function:** Ingests raw Cisco IOS running-configurations (`running-config`), evaluates parameters against CCNA hardening baselines (SSH v2, switchport sticky MAC port security, VLAN 99 management isolation, and perimeter NAT/PAT overload), and exposes a REST API for automated compliance checks.
+- **Purpose:** Connects software security directly to physical/virtual network infrastructure compliance within the **SWARM-SEC** pipeline.
+- **Output:** 
+  - Structured Compliance JSON Payload (`/api/v1/audit/cisco`)
+  - Automated Cisco IOS CLI Remediation Script Sequence
+- **Bobcoin Cost:** **~2–4 BC** *(Hybrid Local Regex AST + Optional LLM Remediation Reasoning)*
+
+---
+
+## 🔐 Auth & DB Lifecycle Utility Modules
+*(Local database CRUD operations for authentication system lifecycle management; 0 BC cost.)*
+
+- **Register User (`INSERT`):** Adds new user accounts securely into the database.
+- **Password Manager (`UPDATE`):** Updates existing user credentials with secure hashing algorithms.
+- **Account Deleter (`DELETE`):** Purges user records to ensure full database lifecycle control.
+
+---
