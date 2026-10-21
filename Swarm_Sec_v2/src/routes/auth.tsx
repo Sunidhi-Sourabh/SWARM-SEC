@@ -1,0 +1,15 @@
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect, useState, type FormEvent } from 'react';
+import { LoaderCircle, Mail, ShieldCheck } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
+import { lovable } from '@/integrations/lovable/index';
+import { PrivacyNotice } from '@/components/swarm/PrivacyNotice';
+import { useAccount } from '@/components/swarm/AuthProvider';
+export const Route = createFileRoute('/auth')({ head: () => ({ meta: [{ title: 'Sign In & Register — SWARM-SEC' }, { name: 'description', content: 'Securely access private encrypted SWARM-SEC audit history with Google or email magic links.' }, { property: 'og:title', content: 'Private Workspace Sign In — SWARM-SEC' }, { property: 'og:description', content: 'Google and passwordless email access to your security workspace.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' }] }), component: Auth });
+function Auth() {
+ const { user } = useAccount(); const navigate = useNavigate(); const [email, setEmail] = useState(''); const [busy, setBusy] = useState(false); const [message, setMessage] = useState(''); const [error, setError] = useState('');
+ useEffect(() => { if (user) void navigate({ to: '/saved-audits', replace: true }); }, [user, navigate]);
+ const magic = async (e: FormEvent) => { e.preventDefault(); setBusy(true); setError(''); const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/auth` } }); setBusy(false); if (error) setError(error.message); else setMessage('Check your email for your secure sign-in link. You are not signed in until you open it.'); };
+ return <div className="mx-auto max-w-xl px-4 py-12"><ShieldCheck className="mb-4 h-10 w-10 text-primary" /><h1 className="text-3xl">Sign In / Register</h1><p className="mt-2 text-muted-foreground">Your private SWARM-SEC workspace</p><div className="mt-8 space-y-5 rounded-md border bg-card p-6"><Button className="w-full" disabled={busy} onClick={async () => { setBusy(true); setError(''); try { const r = await lovable.auth.signInWithOAuth('google', { redirect_uri: `${window.location.origin}/auth` }); if (r.error) setError(r.error.message); } catch { setError('Google sign-in failed. Please try again.'); } finally { setBusy(false); } }}>Sign in with Google</Button><div className="border-t pt-5"><form onSubmit={magic} className="space-y-3"><label htmlFor="auth-email" className="block text-sm">Email</label><input id="auth-email" type="email" required value={email} onChange={e => setEmail(e.target.value)} className="w-full rounded border bg-background px-3 py-2" /><Button className="w-full" disabled={busy}>{busy ? <LoaderCircle className="animate-spin" /> : <Mail />}Send Email Magic Link</Button></form></div>{error && <p role="alert" className="text-sm text-destructive">{error}</p>}{message && <p role="status" className="text-sm text-success">{message}</p>}<PrivacyNotice /></div></div>;
+}
