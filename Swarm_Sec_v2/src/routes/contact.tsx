@@ -2,9 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { BookOpen, Github, Send, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
-import { useServerFn } from "@tanstack/react-start";
-import { submitInquiry } from "@/lib/contact.functions";
-import { contactSchema as schema } from "@/lib/contact-schema";
 import { Button } from "@/components/ui/button";
 import { Card, SectionTitle } from "@/components/swarm/ui";
 
@@ -26,28 +23,49 @@ const field = "w-full rounded-sm border bg-input/40 px-3 py-2.5 text-sm outline-
 
 function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const send = useServerFn(submitInquiry);
   const [busy, setBusy] = useState(false);
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-    const r = schema.safeParse(data);
-    if (!r.success) {
-      setErrors(Object.fromEntries(r.error.issues.map((i) => [i.path[0], i.message])));
-      return;
-    }
     setErrors({});
     const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
     setBusy(true);
     try {
-      const result = await send({ data: r.data });
-      form.reset();
-      if (result.sent) toast.success("Inquiry Received! Sent to sunidhi11s.gdg@gmail.com. Our SecOps team will reach out shortly.");
-      else toast.warning("Inquiry saved. Email delivery is not configured correctly; your message remains available to Team Innovatrix.");
-    } catch (error) { toast.error(error instanceof Error ? error.message : "Submission failed. Please try again."); }
-    finally { setBusy(false); }
+      const response = await fetch("https://formspree.io/f/xzednlpy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast.success("Inquiry submitted successfully! Our SecOps team will reach out shortly.");
+        form.reset();
+      } else {
+        const errorData = await response.json().catch(() => null);
+        if (errorData && errorData.errors) {
+          const newErrors: Record<string, string> = {};
+          errorData.errors.forEach((err: { field: string; message: string }) => {
+            newErrors[err.field] = err.message;
+          });
+          setErrors(newErrors);
+        }
+        toast.error("Failed to submit inquiry. Please check the fields and try again.");
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Submission failed. Please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
+
   const err = (k: string) => errors[k] && <p className="mt-1 text-xs text-destructive">{errors[k]}</p>;
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <SectionTitle eyebrow="Contact" title="Enterprise Inquiry & Feedback" sub="Request a security audit, explore a partnership, or tell us what you think." />
@@ -55,7 +73,7 @@ function Contact() {
         <Card>
           <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2" noValidate>
             <div><label htmlFor="contact-name" className="mb-1 block text-xs text-muted-foreground">Full Name</label><input id="contact-name" name="name" className={field} />{err("name")}</div>
-            <div><label htmlFor="contact-org" className="mb-1 block text-xs text-muted-foreground">Organization / Institution</label><input id="contact-org" name="org" className={field} /></div>
+            <div><label htmlFor="contact-org" className="mb-1 block text-xs text-muted-foreground">Organization / Institution</label><input id="contact-org" name="org" className={field} />{err("org")}</div>
             <div><label htmlFor="contact-email" className="mb-1 block text-xs text-muted-foreground">Email</label><input id="contact-email" name="email" type="email" className={field} />{err("email")}</div>
             <div><label htmlFor="contact-subject" className="mb-1 block text-xs text-muted-foreground">Subject</label><input id="contact-subject" name="subject" className={field} />{err("subject")}</div>
             <div className="sm:col-span-2"><label htmlFor="contact-type" className="mb-1 block text-xs text-muted-foreground">Query Type</label>
